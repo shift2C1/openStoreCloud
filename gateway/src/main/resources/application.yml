@@ -11,6 +11,7 @@ spring:
       routes:
         - id: service1router
           uri: lb://service-1
+#          uri: http://127.0.0.1:6001
           predicates:
             - Path=/**
 #            - name: Cookie
@@ -20,7 +21,7 @@ spring:
     nacos:
       discovery:
         enabled: true
-        server-addr: '127.0.0.1:8080'
+        server-addr: '127.0.0.1:8848'
 management:
   endpoint:
     gateway:
