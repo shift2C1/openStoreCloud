@@ -1,16 +1,26 @@
+server:
+  port: 8080
 spring:
   cloud:
     gateway:
+      discovery:
+        locator:
+#          从注册中心拉取动态路由
+          enabled: true
       enabled: true
       routes:
-        - id: after_route
-          uri: http://localhost:8080/
+        - id: service1router
+          uri: lb://service-1
           predicates:
-            - name: Cookie
-              args:
-                name: mycookie
-                regexp: mycookievalue
-
+            - Path=/**
+#            - name: Cookie
+#              args:
+#                name: mycookie
+#                regexp: mycookievalue
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: '127.0.0.1:8080'
 management:
   endpoint:
     gateway:
@@ -19,5 +29,3 @@ management:
     web:
       exposure:
         include: 'gateway'
-server:
-  port: 8080
