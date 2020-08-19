@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+        - id: after_route
+          uri: http://localhost:8080/
+          predicates:
+            - name: Cookie
+              args:
+                name: mycookie
+                regexp: mycookievalue
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: 'gateway'
+server:
+  port: 8080
