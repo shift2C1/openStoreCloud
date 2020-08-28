@@ -4,6 +4,14 @@ spring:
   application:
     name: service-2
   cloud:
+    sentinel:
+      transport:
+        # 控制台端口
+        dashboard: localhost:65535
+#        在应用对应的机器上启动一个 Http Server，该 Server 会与 Sentinel 控制台做交互。比如 Sentinel 控制台添加了一个限流规则，会把规则数据 push 给这个 Http Server 接收，Http Server 再将规则注册到 Sentinel 中
+        port: 65534
+      log:
+        dir: /home/logs/sentinel/
     nacos:
       discovery:
         enabled: true
